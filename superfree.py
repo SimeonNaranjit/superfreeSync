@@ -9,6 +9,7 @@ CACHE_DIR = '/superfree-cache'
 
 def scanDirectories():
     for dirName, subdirList, fileList in os.walk(SRC_DIR.keys()):
+        pass
         
         
 
