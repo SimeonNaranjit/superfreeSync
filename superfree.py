@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os 
+import subprocess
 #import inotify
 
 #on startup scan src dir if exists
@@ -10,6 +11,7 @@ SRC_DIR['/superfree'] = ['movies','tv_series']
 #CACHE_DIR = '/superfree-cache'
 CACHE_DIR = '/home/junya'
 TIME_IN_DAYS = 30
+FILE_PERCENT = 10
 
 def scanDirectories():
     sourceDir = SRC_DIR.keys()[0]
@@ -23,14 +25,18 @@ def scanDirectories():
         else:
             if os.path.isfile(root):
                 f = os.stat(root)
-                f.st_atime(root) > TIME_IN_DAYS * 86400
+                if f.st_atime(root) > TIME_IN_DAYS * 86400:
+                    copyFilePercent(root)
             rsyncFile(sourceDir,CACHE_DIR)
 
         print(root)
          
-        
-
-
+def copyFilePercent(fileName):
+    fileSize = os.path.getsize(fileName)
+    filePercentSize = fileSize * float("." + FILE_PERCENT)
+    subprocess.call(head --bytes=%s %s % filePercentSize
+    
+    
 if __name__ == "__main__":
     scanDirectories()
     #inotify wait here..
